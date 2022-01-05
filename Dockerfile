@@ -4,4 +4,5 @@ WORKDIR /app
 RUN pip3 install -r requirements.txt
 RUN mkdir -p /root/.cache/torch/hub/checkpoints/
 RUN curl https://download.pytorch.org/models/mobilenet_v3_large-8738ca79.pth -o /root/.cache/torch/hub/checkpoints/mobilenet_v3_large-8738ca79.pth
+RUN gdown --fuzzy https://drive.google.com/file/d/1BBkYeUC8rj1lzy0F8iG6ONaxkSvO6YDS/view?usp=sharing 
 CMD ["python3","run.py"]

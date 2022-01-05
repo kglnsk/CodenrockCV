@@ -11,6 +11,7 @@ from torch.autograd import Variable
 from PIL import Image
 import os
 import pandas as pd
+import timm
 import time 
 from tqdm import tqdm
 
@@ -26,7 +27,7 @@ def predict_image(image):
 
 if __name__ == "__main__":
   print("Ok")
-  img_size = 224
+  img_size = 299
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
   inference_model = torch.load("model.pt")
   inference_model.eval().cpu()
