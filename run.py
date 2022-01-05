@@ -26,6 +26,7 @@ def predict_image(image):
 
 if __name__ == "__main__":
   print("Ok")
+  img_size = 224
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
   inference_model = torch.load("model.pt")
   inference_model.eval().cpu()
