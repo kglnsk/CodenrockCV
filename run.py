@@ -30,7 +30,7 @@ if __name__ == "__main__":
   img_size = 299
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
   inference_model = torch.load("model.pt")
-  inference_model.eval().cpu()
+  inference_model.eval().to(device)
   test_transforms = transforms.Compose([
         transforms.Resize((img_size, img_size)),
         transforms.ToTensor(),
