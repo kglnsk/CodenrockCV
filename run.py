@@ -19,9 +19,9 @@ from tqdm import tqdm
 def predict_image(image):
     image_tensor = test_transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
-    input = Variable(image_tensor)
-    input = input.to(device)
-    output = inference_model(image_tensor)
+    inputs = Variable(image_tensor)
+    inputs = inputs.to(device)
+    output = inference_model(inputs)
     index = output.detach().cpu().numpy().argmax()
     return index
 
