@@ -21,7 +21,10 @@ def predict_image(image):
     image_tensor = image_tensor.unsqueeze_(0)
     inputs = Variable(image_tensor)
     inputs = inputs.to(device)
-    output = inference_model(inputs)
+    output_1 = inference_model(inputs)
+    output_2 = effnet_model(inputs)
+    output = (torch.nn.functional.softmax(output_1,dim = -1) + torch.nn.functional.softmax(output_2,dim = -1))/2.0
+    print(output)
     index = output.detach().cpu().numpy().argmax()
     return index
 
@@ -30,7 +33,9 @@ if __name__ == "__main__":
   img_size = 299
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
   inference_model = torch.load("model.pt")
+  effnet_model = torch.load('eff_net.pt')
   inference_model.eval().to(device)
+  effnet_model.eval().to(device)
   test_transforms = transforms.Compose([
         transforms.Resize((img_size, img_size)),
         transforms.ToTensor(),
